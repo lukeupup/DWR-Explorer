@@ -1,0 +1,36 @@
+html, body {
+  height: 100%;
+  font: 13px/1.22 Helvetica, Arial, sans-serif;
+  color: #555;
+}
+.side-content {
+  float: left;
+  width: 40%;
+  max-width: 400px;
+  border-right: 1px solid #CCC;
+  height: 100%;
+  overflow: auto;
+}
+.side-content .entry {
+  padding: 5px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.side-content .entry:hover{
+  background: #EEE;
+}
+.main-content {
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 5px;
+}
+.J_EntryDetail {
+  display: none;
+}
+
+#dwr_parser_iframe {
+  display: none;
+}
