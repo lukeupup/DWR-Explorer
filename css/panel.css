@@ -45,15 +45,16 @@ ul.jqtree-tree .jqtree-title.objInsEntryTag {
   color: rgb(136, 19, 145);
 }
 
-ul.jqtree-tree .jqtree-title.objInsEntryValue[type='number'] {
+ul.jqtree-tree .jqtree-title.objInsEntryValue[data-type='number']
+ul.jqtree-tree .jqtree-title.objInsEntryValue[data-type='boolean'] {
   color: rgb(28, 0, 207);
 }
 
-ul.jqtree-tree .jqtree-title.objInsEntryValue[type='string'] {
+ul.jqtree-tree .jqtree-title.objInsEntryValue[data-type='string'] {
   color: rgb(196, 26, 22);
 }
 
-ul.jqtree-tree .jqtree-title.objInsEntryValue[type='undefined'] {
+ul.jqtree-tree .jqtree-title.objInsEntryValue[data-type='undefined'] {
   color: rgb(128, 128, 128);
 }
 

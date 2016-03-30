@@ -74,7 +74,7 @@ ObjectInspector.prototype.show = function() {
       $sep = $tag.clone().css('margin-left', '0').addClass('objInsEntrySep');
       $value = $tag.clone().css('margin-left', '0').addClass('objInsEntryValue');
       if (node.type) {
-        $value.attr('type', node.type);
+        $value.attr('data-type', node.type);
       }
       $tag.addClass('objInsEntryTag');
       $sep.appendTo($nodeDiv);
