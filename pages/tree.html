@@ -1,0 +1,10 @@
+<span class="name">{{item.key}}</span>:
+<span>{{item.value}}</span>
+<ol ng-model="item.items">
+    <li ng-class="{parent: item.hasItems}"
+        ng-repeat="item in item.items"
+        ng-include="templates.tree"
+        ng-click="toggleItem(item);">
+
+    </li>
+</ol>

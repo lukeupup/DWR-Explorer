@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="dwrexplorer">
 <head>
-  <title>panel</title>
-  <link rel="stylesheet" type="text/css" href="../css/reset.css">
-  <link rel="stylesheet" type="text/css" href="../lib/jqtree.css"> 
-  <link rel="stylesheet" type="text/css" href="../css/panel.css">
+    <title>panel</title>
+    <link rel="stylesheet" type="text/css" href="../css/dwrexplorer.css">
+    <script src="../lib/angular.min.js"></script>
+
 </head>
 <body>
-  <div id="tree"></div>
-  <iframe id="dwr_parser_iframe" src="../sandbox.html"></iframe>
-  <ul class="J_DWRList side-content"></ul>
-  <div class="J_DWRContent main-content"></div>
-  <script type="text/javascript" src="../lib/jquery-2.2.2.min.js"></script>
-  <script type="text/javascript" src="../lib/tree.jquery.js"></script>
-  <script type="text/javascript" src="../js/panel.js"></script>
-  <script type="text/javascript" src="../js/ObjectInspector.js"></script>
+<main ng-controller="AppController">
+    <aside class="J_DWRList side-panel">
+        <ol ng-model="dwrs">
+            <li ng-repeat="dwr in dwrs">
+                <a href="javascript:void(0)" ng-click="showDetail($event, dwr.res);">{{dwr.name}}</a>
+            </li>
+        </ol>
+    </aside>
+    <div class="J_DWRContent detail-panel" ng-controller="DetailController" ng-model="content">
+        <ol class="tree-outline" ng-model="tree.items">
+            <li ng-class="{parent: item.hasItems}"
+                ng-repeat="item in tree.items"
+                ng-include="templates.tree"
+                ng-click="toggleItem(item)"></li>
+        </ol>
+    </div>
+</main>
+<iframe id="sandbox" src="../sandbox.html" style="display: none;"></iframe>
+
+<script src="../js/dwrexplorer.js"></script>
+<script src="../js/appController.js"></script>
+<script src="../js/detailController.js"></script>
+
 </body>
 </html>

@@ -10,6 +10,7 @@ window.addEventListener('message', function(event) {
   } 
   window.parent.postMessage({
     dwrObject: getDWRObject(),
-    dwrId: event.data.dwrId
+    dwrId: event.data.dwrId,
+    name: event.data.name
   }, '*');
 });
