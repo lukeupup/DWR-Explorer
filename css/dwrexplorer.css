@@ -57,13 +57,10 @@ main {
     font-size: 120%;
 }
 
-.detail-panel ol {
-    margin-left: .5rem;
-}
-
 .detail-panel li {
     cursor: default;
-    padding: .125rem 0;
+    padding: .125rem 0 .125rem .75rem;
+    position: relative;
 }
 
 .detail-panel li.parent {
@@ -73,3 +70,26 @@ main {
 .detail-panel li .name {
     color: rgb(136, 19, 145);
 }
+
+.arrow {
+    position: absolute;
+    top: .3125rem;
+    left: 0;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: .25rem solid transparent;
+    border-right: .25rem solid transparent;
+    border-top: .375rem solid #888;
+}
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: .25rem solid transparent;
+    border-bottom: .25rem solid transparent;
+    border-left: .375rem solid #888;
+}
+

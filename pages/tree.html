@@ -1,10 +1,10 @@
+<i class="arrow" ng-class="{'arrow-right': !item.expanded, 'arrow-down': item.expanded}" ng-show="item.hasItems"></i>
 <span class="name">{{item.key}}</span>:
 <span>{{item.value}}</span>
-<ol ng-model="item.items">
+<ol ng-model="item.items" ng-show="item.expanded">
     <li ng-class="{parent: item.hasItems}"
-        ng-repeat="item in item.items"
+        ng-repeat="item in item.items track by $id(item)"
         ng-include="templates.tree"
-        ng-click="toggleItem(item);">
-
+        ng-click="toggleItem($event, item);">
     </li>
 </ol>
