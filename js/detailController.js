@@ -21,6 +21,7 @@ app.controller('DetailController', ['$scope', function ($scope) {
             key: key,
             value: valueProperty.text,
             hasItems: valueProperty.hasItems,
+            type: valueProperty.type,
             items: [],
             ref: $scope.data[key]
           });
@@ -37,6 +38,7 @@ app.controller('DetailController', ['$scope', function ($scope) {
         key: key,
         value: valueProperty.text,
         hasItems: valueProperty.hasItems,
+        type: valueProperty.type,
         items: [],
         ref: item.ref[key]
       });
@@ -57,9 +59,23 @@ app.controller('DetailController', ['$scope', function ($scope) {
     item.expanded = !item.expanded;
   };
 
+  $scope.getValueStyleClass = function (type) {
+    if (!this._valueStyleClassMap) {
+      this._valueStyleClassMap = {
+        string: 'value-string',
+        number: 'value-number',
+        boolean: 'value-boolean',
+        'undefined': 'value-undefined'
+      }
+    }
+
+    return this._valueStyleClassMap[type] || '';
+  };
+
   var getValueProperty = function (value) {
     var property = {
       text: '',
+      type: '',
       hasItems: false
     };
 
@@ -93,10 +109,16 @@ app.controller('DetailController', ['$scope', function ($scope) {
         property.text = 'undefined';
         break;
 
+      case 'string':
+        property.text = '"' + value + '"';
+        break;
+
       default:
         property.text = value.toString();
         break;
     }
+
+    property.type = (typeof value);
 
     return property;
   };

@@ -1,6 +1,6 @@
 <i class="arrow" ng-class="{'arrow-right': !item.expanded, 'arrow-down': item.expanded}" ng-show="item.hasItems"></i>
 <span class="name">{{item.key}}</span>:
-<span>{{item.value}}</span>
+<span class="value" ng-class="getValueStyleClass(item.type)">{{item.value}}</span>
 <ol ng-model="item.items" ng-show="item.expanded">
     <li ng-class="{parent: item.hasItems}"
         ng-repeat="item in item.items track by $id(item)"

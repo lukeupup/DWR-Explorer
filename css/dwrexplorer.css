@@ -71,6 +71,27 @@ main {
     color: rgb(136, 19, 145);
 }
 
+.detail-panel li .value {
+    word-break: break-all;
+}
+
+.detail-panel li .value.value-object {
+
+}
+
+.detail-panel li .value.value-boolean,
+.detail-panel li .value.value-number {
+    color: rgb(28, 0, 207);
+}
+
+.detail-panel li .value.value-string {
+    color: rgb(196, 26, 22);
+}
+
+.detail-panel li .value.value-undefined {
+    color: rgb(128, 128, 128);
+}
+
 .arrow {
     position: absolute;
     top: .3125rem;
