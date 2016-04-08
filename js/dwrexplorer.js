@@ -35,6 +35,10 @@ var app = angular.module('dwrexplorer', [])
       }
     });
 
+    chrome.devtools.network.onNavigated.addListener(function () {
+      $rootScope.dwrs = [];
+    });
+
     window.addEventListener('message', function (event) {
       var data = event.data;
 

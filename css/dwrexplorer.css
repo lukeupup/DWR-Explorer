@@ -48,6 +48,7 @@ main {
     color: #333;
     padding : .5rem;
     display: block;
+    font-size: 120%;
 }
 
 .detail-panel {

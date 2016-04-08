@@ -6,27 +6,32 @@ app.controller('DetailController', ['$scope', function ($scope) {
   };
 
   $scope.$watch('content', function (newVal) {
-    if (newVal) {
-      $scope.data = newVal;
+    $scope.data = newVal;
 
-      $scope.tree = {
-        items: []
-      };
+    $scope.tree = {
+      items: []
+    };
 
-      if (typeof $scope.data === 'object') {
-        angular.forEach($scope.data, function (value, key) {
-          var valueProperty = getValueProperty(value);
+    if (typeof $scope.data === 'object') {
+      angular.forEach($scope.data, function (value, key) {
+        var valueProperty = getValueProperty(value);
 
-          $scope.tree.items.push({
-            key: key,
-            value: valueProperty.text,
-            hasItems: valueProperty.hasItems,
-            type: valueProperty.type,
-            items: [],
-            ref: $scope.data[key]
-          });
+        $scope.tree.items.push({
+          key: key + ':',
+          value: valueProperty.text,
+          hasItems: valueProperty.hasItems,
+          type: valueProperty.type,
+          items: [],
+          ref: $scope.data[key]
         });
-      }
+      });
+    } else {
+      $scope.tree.items.push({
+        key: '',
+        value: newVal,
+        hasItems: false,
+        type: ''
+      });
     }
   });
 
@@ -35,7 +40,7 @@ app.controller('DetailController', ['$scope', function ($scope) {
       var valueProperty = getValueProperty(value);
 
       item.items.push({
-        key: key,
+        key: key + ':',
         value: valueProperty.text,
         hasItems: valueProperty.hasItems,
         type: valueProperty.type,
@@ -51,11 +56,11 @@ app.controller('DetailController', ['$scope', function ($scope) {
     if (!item.hasItems) {
       return false;
     }
-    
+
     if (item.hasItems && item.items.length === 0) {
       $scope.getChildNodes(item);
     }
-    
+
     item.expanded = !item.expanded;
   };
 

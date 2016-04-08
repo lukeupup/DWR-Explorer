@@ -11,7 +11,7 @@
     <aside class="J_DWRList side-panel">
         <ol ng-model="dwrs">
             <li ng-repeat="dwr in dwrs">
-                <a href="javascript:void(0)" ng-click="showDetail($event, dwr.res);">{{dwr.name}}</a>
+                <a href="javascript:void(0)" ng-click="showDetail($event, dwr.res);" title="{{dwr.name}}">{{dwr.name}}</a>
             </li>
         </ol>
     </aside>
