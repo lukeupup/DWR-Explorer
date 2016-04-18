@@ -2,7 +2,7 @@
 
 app.controller('DetailController', ['$scope', 'ngClipboard', function ($scope, ngClipboard) {
 
-  var STRING_MAX_LEN = 20;
+  var STRING_MAX_LEN = 50;
   $scope.templates = {
     tree: '../pages/tree.html'
   };
