@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('dwrexplorer', [])
+var app = angular.module('dwrexplorer', ['ngClipboard'])
   .run(['$rootScope', '$document', function ($rootScope, $document) {
     $rootScope.dwrs = [];
 
@@ -36,12 +36,13 @@ var app = angular.module('dwrexplorer', [])
     });
 
     chrome.devtools.network.onNavigated.addListener(function () {
-      $rootScope.dwrs = [];
+      $rootScope.$apply(function() {
+        $rootScope.dwrs = [];
+      });
     });
 
     window.addEventListener('message', function (event) {
       var data = event.data;
-
       $rootScope.$apply(function () {
         if (data.name) {
           $rootScope.dwrs.push({

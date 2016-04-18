@@ -1,8 +1,15 @@
 'use strict';
 
-app.controller('DetailController', ['$scope', function ($scope) {
+app.controller('DetailController', ['$scope', 'ngClipboard', function ($scope, ngClipboard) {
+
+  var STRING_MAX_LEN = 20;
   $scope.templates = {
     tree: '../pages/tree.html'
+  };
+
+  $scope.enableAddOn = false;
+  $scope.copyValue = function (event, item) {
+    ngClipboard.toClipboard(item.originalValue || item.value);
   };
 
   $scope.$watch('content', function (newVal) {
@@ -22,7 +29,8 @@ app.controller('DetailController', ['$scope', function ($scope) {
           hasItems: valueProperty.hasItems,
           type: valueProperty.type,
           items: [],
-          ref: $scope.data[key]
+          ref: $scope.data[key],
+          originalValue: valueProperty.originalText
         });
       });
     } else {
@@ -45,12 +53,16 @@ app.controller('DetailController', ['$scope', function ($scope) {
         hasItems: valueProperty.hasItems,
         type: valueProperty.type,
         items: [],
-        ref: item.ref[key]
+        ref: item.ref[key],
+        originalValue: valueProperty.originalText
       });
     });
   };
 
   $scope.toggleItem = function (event, item) {
+    if (event.target.classList.contains('itemAddOn')) {
+      return;
+    }
     event.stopPropagation();
 
     if (!item.hasItems) {
@@ -118,7 +130,12 @@ app.controller('DetailController', ['$scope', function ($scope) {
         break;
 
       case 'string':
-        property.text = '"' + value + '"';
+        if (value.length > STRING_MAX_LEN) {
+          property.text = '"' + value.substring(0, STRING_MAX_LEN) + '"...';
+          property.originalText = '"' + value + '"';
+        } else {
+          property.text = '"' + value + '"';
+        }
         break;
 
       default:

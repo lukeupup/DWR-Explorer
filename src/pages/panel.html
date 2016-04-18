@@ -4,14 +4,18 @@
     <title>panel</title>
     <link rel="stylesheet" type="text/css" href="../css/dwrexplorer.css">
     <script src="../lib/angular.min.js"></script>
-
+    <script src="../lib/ngClipboard.js"></script>
 </head>
 <body>
 <main ng-controller="AppController">
     <aside class="J_DWRList side-panel">
+        <div class="toolbarContainer">
+            <div class="clearItems" ng-click="clearItems();"></div>
+            <input class="filterItems" placeholder="Filter" ng-model="filterPattern"></input>
+        </div>
         <ol ng-model="dwrs">
             <li ng-repeat="dwr in dwrs">
-                <a href="javascript:void(0)" ng-click="showDetail($event, dwr.res);" title="{{dwr.name}}">{{dwr.name}}</a>
+                <a href="javascript:void(0)" ng-click="showDetail($event, dwr.res);" title="{{dwr.name}}" ng-show="isVisible(dwr);">{{dwr.name}}</a>
             </li>
         </ol>
     </aside>
