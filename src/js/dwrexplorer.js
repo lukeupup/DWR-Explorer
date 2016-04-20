@@ -37,6 +37,7 @@ var app = angular.module('dwrexplorer', ['ngClipboard'])
 
     chrome.devtools.network.onNavigated.addListener(function () {
       $rootScope.$apply(function() {
+        $rootScope.content = []
         $rootScope.dwrs = [];
       });
     });

@@ -4,10 +4,11 @@ app.controller('AppController', ['$scope', '$rootScope', function ($scope, $root
   $scope.filterPattern = '';
   $scope.showDetail = function (event, res) {
     event.preventDefault();
-    $scope.content = res;
+    $rootScope.content = res;
   };
   $scope.clearItems = function () {
     $rootScope.dwrs = [];
+    $rootScope.content = '';
   };
   $scope.isVisible = function (dwr) {
     var regExp;

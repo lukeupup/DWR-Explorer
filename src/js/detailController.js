@@ -9,7 +9,13 @@ app.controller('DetailController', ['$scope', 'ngClipboard', function ($scope, n
 
   $scope.enableAddOn = false;
   $scope.copyValue = function (event, item) {
-    ngClipboard.toClipboard(item.originalValue || item.value);
+    var itemStr;
+    try {
+      itemStr = JSON.stringify(item.ref);
+    } catch (e) {
+      itemStr = JSON.stringify(JSON.decycle(item.ref));
+    }
+    ngClipboard.toClipboard(itemStr);
   };
 
   $scope.$watch('content', function (newVal) {
