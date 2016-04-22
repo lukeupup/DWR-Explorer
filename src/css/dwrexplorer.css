@@ -43,12 +43,20 @@ main {
     background: #f5f5f5;
 }
 
+.side-panel li.selected {
+    background: #69b;
+}
+
 .side-panel li a {
     text-decoration: none;
     color: #333;
     padding : .5rem;
     display: block;
     font-size: 120%;
+}
+
+.side-panel li.selected a {
+    color: #fff;
 }
 
 .detail-panel {

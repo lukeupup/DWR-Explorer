@@ -9,24 +9,33 @@
 </head>
 <body>
 <main ng-controller="AppController">
-    <aside class="J_DWRList side-panel">
+    <aside class="side-panel">
         <div class="toolbarContainer">
             <div class="clearItems" ng-click="clearItems();"></div>
             <input class="filterItems" placeholder="Filter" ng-model="filterPattern"></input>
         </div>
-        <ol ng-model="dwrs">
-            <li ng-repeat="dwr in dwrs">
-                <a href="javascript:void(0)" ng-click="showDetail($event, dwr.res);" title="{{dwr.name}}" ng-show="isVisible(dwr);">{{dwr.name}}</a>
+        <ol>
+            <li ng-repeat="dwr in dwrs" ng-class="{selected: dwr === selectedDWR}" ng-show="isVisible(dwr);">
+                <a href="javascript:void(0)" ng-click="selectEntry($event, dwr);"
+                    title="{{dwr.har.request.url}}">
+                    {{dwr.name}}
+                </a>
             </li>
         </ol>
     </aside>
-    <div class="J_DWRContent detail-panel" ng-controller="DetailController" ng-model="content">
-        <ol class="tree-outline" ng-model="tree.items">
-            <li ng-class="{parent: item.hasItems}"
-                ng-repeat="item in tree.items"
-                ng-include="templates.tree"
-                ng-click="toggleItem($event, item)"></li>
-        </ol>
+    <div class="detail-panel" ng-controller="DetailController">
+        <div class="toobarContainer">
+            <a href="javascript:void(0);">Response</a>
+            <a href="javascript:void(0);">Request</a>
+        </div>
+        <div>
+            <ol class="tree-outline">
+                <li ng-class="{parent: item.hasItems}"
+                    ng-repeat="item in tree.items"
+                    ng-include="templates.tree"
+                    ng-click="toggleItem($event, item)"></li>
+            </ol>
+        </div>
     </div>
 </main>
 <iframe id="sandbox" src="../sandbox.html" style="display: none;"></iframe>

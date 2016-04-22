@@ -5,6 +5,8 @@ var app = angular.module('dwrexplorer', ['ngClipboard'])
     $rootScope.dwrs = [];
 
     var sandbox = $document[0].querySelector('#sandbox');
+    var dwrTempStorage = {};
+    var dwrIndex = 0;
 
     var dwr2script = window.dwr2script;
 
@@ -12,13 +14,16 @@ var app = angular.module('dwrexplorer', ['ngClipboard'])
       return (req && req.request && /\.dwr$/.test(req.request.url));
     };
 
-    var parseDWR = function (request, response, name) {
+    var parseDWR = function (request, response, index) {
       var message = {
-        name: name
+        type: 'parseDWR',
+        data: {
+          index: index,
+          // todo: error handler
+          requestScript: dwr2script.transformRequest(request),
+          responseScript: dwr2script.transformResponse(response)
+        }
       };
-
-      message.requestScript = dwr2script.transformRequest(request);
-      message.responseScript = dwr2script.transformResponse(response);
 
       sandbox.contentWindow.postMessage(message, '*');
     };
@@ -29,30 +34,39 @@ var app = angular.module('dwrexplorer', ['ngClipboard'])
 
     chrome.devtools.network.onRequestFinished.addListener(function (req) {
       if (isDwrRequest(req)) {
-        var name = getUrlKeyWord(req.request.url);
         req.getContent(function (content) {
-          parseDWR(req.request.postData.text, content, name);
+          var dwr = {
+            har: req,
+            name: getUrlKeyWord(req.request.url),
+            request: req.request.postData.text,
+            response: content
+          };
+          dwrTempStorage[++dwrIndex] = dwr;
+          // todo: it's better to implement using promise.
+          // like: parseDWR(dwr).done(function(){...});
+          parseDWR(req.request.postData.text, content, dwrIndex);
         });
       }
     });
 
     chrome.devtools.network.onNavigated.addListener(function () {
       $rootScope.$apply(function() {
-        $rootScope.content = [];
+        // $rootScope.content = [];
+        $rootScope.selectedDWR = null;
         $rootScope.dwrs = [];
       });
     });
 
     window.addEventListener('message', function (event) {
-      var data = event.data;
-      $rootScope.$apply(function () {
-        if (data.name) {
-          $rootScope.dwrs.push({
-            name: data.name,
-            res: data.parsedResponse,
-            req: data.parsedRequest
-          });
-        }
-      });
+      var message = event.data;
+      if (message.type === 'parseDWRResult') {
+        var dwr = dwrTempStorage[message.data.index];
+        dwr.parsedRequest = message.data.parsedRequest;
+        dwr.parsedResponse = message.data.parsedResponse;
+        $rootScope.$apply(function () {
+          $rootScope.dwrs.push(dwr);
+        });
+        delete dwrTempStorage[message.data.index];
+      }
     });
   }]);

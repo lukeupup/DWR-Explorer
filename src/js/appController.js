@@ -2,13 +2,13 @@
 
 app.controller('AppController', ['$scope', '$rootScope', function ($scope, $rootScope) {
   $scope.filterPattern = '';
-  $scope.showDetail = function (event, res) {
+  $scope.selectEntry = function (event, dwr) {
     event.preventDefault();
-    $rootScope.content = res;
+    $rootScope.selectedDWR = dwr;
   };
   $scope.clearItems = function () {
     $rootScope.dwrs = [];
-    $rootScope.content = '';
+    $rootScope.selectedDWR = null;
   };
   $scope.isVisible = function (dwr) {
     var regExp;

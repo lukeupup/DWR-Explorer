@@ -18,7 +18,7 @@ app.controller('DetailController', ['$scope', 'ngClipboard', function ($scope, n
     ngClipboard.toClipboard(itemStr);
   };
 
-  $scope.$watch('content', function (newVal) {
+  $scope.$watch('selectedDWR.parsedResponse', function (newVal) {
     $scope.data = newVal;
 
     $scope.tree = {
