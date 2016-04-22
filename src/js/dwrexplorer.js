@@ -6,18 +6,19 @@ var app = angular.module('dwrexplorer', ['ngClipboard'])
 
     var sandbox = $document[0].querySelector('#sandbox');
 
+    var dwr2script = window.dwr2script;
+
     var isDwrRequest = function (req) {
       return (req && req.request && /\.dwr$/.test(req.request.url));
     };
 
-    var parseResponseContent = function (content, name) {
+    var parseDWR = function (request, response, name) {
       var message = {
         name: name
       };
 
-      message.dwrContent = content
-        .replace(/throw.*\r/, '')
-        .replace(/dwr\.engine\.(_remoteHandleCallback|_remoteHandleException)\(('\d+'),('\d+'),(.*)\)/, 'result = $4');
+      message.requestScript = dwr2script.transformRequest(request);
+      message.responseScript = dwr2script.transformResponse(response);
 
       sandbox.contentWindow.postMessage(message, '*');
     };
@@ -30,14 +31,14 @@ var app = angular.module('dwrexplorer', ['ngClipboard'])
       if (isDwrRequest(req)) {
         var name = getUrlKeyWord(req.request.url);
         req.getContent(function (content) {
-          parseResponseContent(content, name);
+          parseDWR(req.request.postData.text, content, name);
         });
       }
     });
 
     chrome.devtools.network.onNavigated.addListener(function () {
       $rootScope.$apply(function() {
-        $rootScope.content = []
+        $rootScope.content = [];
         $rootScope.dwrs = [];
       });
     });
@@ -48,7 +49,8 @@ var app = angular.module('dwrexplorer', ['ngClipboard'])
         if (data.name) {
           $rootScope.dwrs.push({
             name: data.name,
-            res: data.dwrObject
+            res: data.parsedResponse,
+            req: data.parsedRequest
           });
         }
       });
