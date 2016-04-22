@@ -6,6 +6,7 @@
     <script src="../lib/cycle.js"></script>
     <script src="../lib/angular.js"></script>
     <script src="../lib/ngClipboard.js"></script>
+    <script src="../lib/ngResizer.js"></script>
 </head>
 <body>
 <main ng-controller="AppController">
@@ -14,12 +15,18 @@
             <div class="clearItems" ng-click="clearItems();"></div>
             <input class="filterItems" placeholder="Filter" ng-model="filterPattern"></input>
         </div>
-        <ol ng-model="dwrs">
-            <li ng-repeat="dwr in dwrs">
-                <a href="javascript:void(0)" ng-click="showDetail($event, dwr.res);" title="{{dwr.name}}" ng-show="isVisible(dwr);">{{dwr.name}}</a>
-            </li>
-        </ol>
+        <div class="entriesContainer">
+            <ol ng-model="dwrs">
+                <li ng-repeat="dwr in dwrs">
+                    <a href="javascript:void(0)" ng-click="showDetail($event, dwr.res);" title="{{dwr.name}}" ng-show="isVisible(dwr);">{{dwr.name}}</a>
+                </li>
+            </ol>
+        </div>
     </aside>
+    <div class="separator"
+         ng-resizer="vertical"
+         ng-resizer-left=".side-panel" 
+         ng-resizer-right=".detail-panel"></div>
     <div class="J_DWRContent detail-panel" ng-controller="DetailController" ng-model="content">
         <ol class="tree-outline" ng-model="tree.items">
             <li ng-class="{parent: item.hasItems}"
