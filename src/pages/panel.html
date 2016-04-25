@@ -13,7 +13,7 @@
     <aside class="side-panel">
         <div class="toolbarContainer">
             <div class="clearItems" ng-click="clearItems();"></div>
-            <input class="filterItems" placeholder="Filter" ng-model="filterPattern"></input>
+            <input class="filterItems" placeholder="Enter Regular Expression" ng-model="filterPattern"></input>
         </div>
         <div class="entriesContainer">
             <ol>
@@ -31,12 +31,18 @@
          ng-resizer-left=".side-panel" 
          ng-resizer-right=".detail-panel"></div>
     <div class="detail-panel" ng-controller="DetailController">
-        <ol class="tree-outline">
-            <li ng-class="{parent: item.hasItems}"
-                ng-repeat="item in tree.items"
-                ng-include="templates.tree"
-                ng-click="toggleItem($event, item)"></li>
-        </ol>
+        <div class="toobarContainer">
+            <a href="javascript:void(0);">Response</a>
+            <a href="javascript:void(0);">Request</a>
+        </div>
+        <div>
+            <ol class="tree-outline">
+                <li ng-class="{parent: item.hasItems}"
+                    ng-repeat="item in tree.items"
+                    ng-include="templates.tree"
+                    ng-click="toggleItem($event, item)"></li>
+            </ol>
+        </div>
     </div>
 </main>
 <iframe id="sandbox" src="../sandbox.html" style="display: none;"></iframe>
