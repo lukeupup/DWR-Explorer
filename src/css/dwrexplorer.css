@@ -41,6 +41,7 @@ main {
   display: table;
   width: 100%;
   color: #333;
+  -webkit-user-select: none;
 }
 
 .dwrList .dwrEntry {
@@ -190,6 +191,7 @@ main {
 .clearItems {
   background-image: url(../assets/icons.png);
   background-position: -67px 0;
+  cursor: pointer;
 }
 
 .copyButton {

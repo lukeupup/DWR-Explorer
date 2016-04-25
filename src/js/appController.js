@@ -11,9 +11,10 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
   var dwr2script = window.dwr2script;
 
   $scope.filterPattern = '';
+
   $scope.selectEntry = function (event, dwr) {
     event.preventDefault();
-    $scope.currentTab = 'RESPONSE';
+    $scope.switchTab('RESPONSE');
     $scope.selectedDWR = dwr;
   };
   $scope.clearItems = function() {
@@ -35,6 +36,8 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
   $scope.isCurrentTab = function (tab) {
     return $scope.currentTab === tab;
   };
+
+  $scope.switchTab('RESPONSE');
 
   var isDwrRequest = function (req) {
     return (req && req.request && /\.dwr$/.test(req.request.url));
