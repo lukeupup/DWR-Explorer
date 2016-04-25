@@ -11,7 +11,7 @@
 </head>
 <body>
 <main ng-controller="AppController">
-    <aside class="side-panel">
+    <aside class="sidePanel">
         <div class="toolbarContainer">
             <div class="clearItems" ng-click="clearItems();"></div>
             <input class="filterItems" placeholder="Enter Regular Expression" ng-model="filterPattern"></input>
@@ -29,18 +29,22 @@
     </aside>
     <div class="separator"
          ng-resizer="vertical"
-         ng-resizer-left=".side-panel" 
-         ng-resizer-right=".detail-panel"></div>
-    <div class="detail-panel">
-        <div class="toobarContainer">
-            <a href="javascript:void(0);" ng-click="switchPanel('RESPONSE')">Response</a>
-            <a href="javascript:void(0);" ng-click="switchPanel('REQUEST')">Request</a>
+         ng-resizer-left=".sidePanel" 
+         ng-resizer-right=".detailPanel"></div>
+    <div class="detailPanel">
+        <div class="toolbarContainer">
+            <a href="javascript:void(0);" class="toolbarTabButton"
+                ng-class="{selected: isCurrentTab('RESPONSE')}" ng-click="switchTab('RESPONSE')">Response</a>
+            <a href="javascript:void(0);" class="toolbarTabButton"
+                ng-class="{selected: isCurrentTab('REQUEST')}" ng-click="switchTab('REQUEST')">Request</a>
         </div>
-        <div ng-if="currentPanel==='RESPONSE'">
-            <ng-object object="selectedDWR.parsedResponse" object-name="'Response'"></ng-object>
-        </div>
-        <div ng-if="currentPanel==='REQUEST'">
-            <ng-object object="selectedDWR.parsedRequest" object-name="'Request'"></ng-object>
+        <div class="detailPanelContainer" ng-if="selectedDWR">
+            <div ng-if="isCurrentTab('RESPONSE')">
+                <ng-object object="selectedDWR.parsedResponse" object-name="'Response'"></ng-object>
+            </div>
+            <div ng-if="isCurrentTab('REQUEST')">
+                <ng-object object="selectedDWR.parsedRequest" object-name="'Request'"></ng-object>
+            </div>
         </div>
     </div>
 </main>
