@@ -67,7 +67,6 @@ main {
 }
 
 .separator {
-  width: 6px;
   cursor: ew-resize;
   position: absolute;
   top: 0;

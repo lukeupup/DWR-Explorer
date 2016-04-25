@@ -6,6 +6,10 @@ angular.module('ngResizer', []).directive('ngResizer', function($document) {
 
   return function($scope, $element, $attrs) {
 
+    $element.css({
+      width: $attrs.ngResizerWidth + 'px'
+    });
+
     $element.on('mousedown', function(event) {
       event.preventDefault();
 
@@ -23,12 +27,12 @@ angular.module('ngResizer', []).directive('ngResizer', function($document) {
           x = parseInt($attrs.ngResizerMax);
         }
 
-        // if ($attrs.ngResizerLeftMin && x < $attrs.ngResizerLeftMin) {
-        //   x = parseInt
-        // }
+        if ($attrs.ngResizerLeftMin && x < $attrs.ngResizerLeftMin) {
+          x = parseInt($attrs.ngResizerLeftMin);
+        }
 
         $element.css({
-          left: x - 3 + 'px'
+          left: Math.floor(x - $attrs.ngResizerWidth / 2) + 'px'
         });
 
         $($attrs.ngResizerLeft).css({
@@ -40,6 +44,7 @@ angular.module('ngResizer', []).directive('ngResizer', function($document) {
 
       } else {
         // Handle horizontal resizer
+        // Horizontal resizer is unreliable for now
         var y = window.innerHeight - event.pageY;
 
         $element.css({

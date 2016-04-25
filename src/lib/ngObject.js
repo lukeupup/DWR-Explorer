@@ -8,7 +8,6 @@ angular.module('ngObject', []).directive('ngObject', function() {
     controller: ['$scope', 'ngClipboard', function($scope, ngClipboard) {
       var STRING_MAX_LEN = 80;
       $scope.$watch('object', function(newVal) {
-        console.log($scope);
         if ($scope.objectName) {
           $scope.data = {};
           $scope.data[$scope.objectName] = newVal;
