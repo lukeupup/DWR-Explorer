@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('dwrexplorer', ['ngClipboard', 'ngResizer'])
+var app = angular.module('dwrexplorer', ['ngClipboard', 'ngResizer', 'ngObject'])
   .run(['$rootScope', '$document', function ($rootScope, $document) {
     $rootScope.dwrs = [];
 

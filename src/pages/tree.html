@@ -7,7 +7,7 @@
 <ol ng-init="enableAddOn=false" ng-show="item.expanded">
     <li ng-class="{parent: item.hasItems}"
         ng-repeat="item in item.items track by $id(item)"
-        ng-include="templates.tree"
+        ng-include="'tree.html'"
         ng-click="toggleItem($event, item);">
     </li>
 </ol>

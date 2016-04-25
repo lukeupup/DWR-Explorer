@@ -7,6 +7,7 @@
     <script src="../lib/angular.js"></script>
     <script src="../lib/ngClipboard.js"></script>
     <script src="../lib/ngResizer.js"></script>
+    <script src="../lib/ngObject.js"></script>
 </head>
 <body>
 <main ng-controller="AppController">
@@ -30,18 +31,16 @@
          ng-resizer="vertical"
          ng-resizer-left=".side-panel" 
          ng-resizer-right=".detail-panel"></div>
-    <div class="detail-panel" ng-controller="DetailController">
+    <div class="detail-panel">
         <div class="toobarContainer">
-            <a href="javascript:void(0);">Response</a>
-            <a href="javascript:void(0);">Request</a>
+            <a href="javascript:void(0);" ng-click="switchPanel('RESPONSE')">Response</a>
+            <a href="javascript:void(0);" ng-click="switchPanel('REQUEST')">Request</a>
         </div>
-        <div>
-            <ol class="tree-outline">
-                <li ng-class="{parent: item.hasItems}"
-                    ng-repeat="item in tree.items"
-                    ng-include="templates.tree"
-                    ng-click="toggleItem($event, item)"></li>
-            </ol>
+        <div ng-if="currentPanel==='RESPONSE'">
+            <ng-object object="selectedDWR.parsedResponse" object-name="'Response'"></ng-object>
+        </div>
+        <div ng-if="currentPanel==='REQUEST'">
+            <ng-object object="selectedDWR.parsedRequest" object-name="'Request'"></ng-object>
         </div>
     </div>
 </main>
