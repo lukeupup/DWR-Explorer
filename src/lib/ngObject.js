@@ -8,18 +8,14 @@ angular.module('ngObject', []).directive('ngObject', function() {
     controller: ['$scope', 'ngClipboard', function($scope, ngClipboard) {
       var STRING_MAX_LEN = 80;
       $scope.$watch('object', function(newVal) {
-        if ($scope.objectName) {
-          $scope.data = {};
-          $scope.data[$scope.objectName] = newVal;
-        } else {
-          $scope.data = newVal;
-        }
+        $scope.data = {};
+        $scope.data[$scope.objectName || ''] = newVal;
         $scope.items = [];
         if (typeof $scope.data === 'object') {
           angular.forEach($scope.data, function(value, key) {
             var valueProperty = getValueProperty(value);
             $scope.items.push({
-              key: key + ':',
+              key: key.toString(),
               value: valueProperty.text,
               hasItems: valueProperty.hasItems,
               type: valueProperty.type,
@@ -111,7 +107,7 @@ angular.module('ngObject', []).directive('ngObject', function() {
           var valueProperty = getValueProperty(value);
 
           item.items.push({
-            key: key + ':',
+            key: key.toString(),
             value: valueProperty.text,
             hasItems: valueProperty.hasItems,
             type: valueProperty.type,

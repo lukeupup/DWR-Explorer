@@ -17,12 +17,12 @@
             <input class="filterItems" placeholder="Enter Regular Expression" ng-model="filterPattern"></input>
         </div>
         <div class="entriesContainer">
-            <ol>
-                <li ng-repeat="dwr in dwrs" ng-class="{selected: dwr === selectedDWR}" ng-show="isVisible(dwr);">
-                    <a href="javascript:void(0)" ng-click="selectEntry($event, dwr);"
-                        title="{{dwr.har.request.url}}">
-                        {{dwr.name}}
-                    </a>
+            <ol class="dwrList">
+                <li ng-repeat="dwr in dwrs" class="dwrEntry" ng-class="{selected: dwr === selectedDWR}"
+                    ng-show="isVisible(dwr);" ng-click="selectEntry($event, dwr);"
+                    title="{{dwr.har.request.url}}"
+                >
+                    {{dwr.name}}
                 </li>
             </ol>
         </div>
@@ -42,10 +42,10 @@
         </div>
         <div class="detailPanelContainer" ng-if="selectedDWR">
             <div ng-style="{display: isCurrentTab('RESPONSE') ? 'block': 'none'}">
-                <ng-object object="selectedDWR.parsedResponse" object-name="'Response'"></ng-object>
+                <ng-object object="selectedDWR.parsedResponse" ></ng-object>
             </div>
             <div ng-style="{display: isCurrentTab('REQUEST') ? 'block': 'none'}">
-                <ng-object object="selectedDWR.parsedRequest" object-name="'Request'"></ng-object>
+                <ng-object object="selectedDWR.parsedRequest" ></ng-object>
             </div>
         </div>
     </div>

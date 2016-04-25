@@ -1,11 +1,12 @@
 <div ng-mouseenter="enableAddOn=true" ng-mouseleave="enableAddOn=false">
   <i class="arrow" ng-class="{'arrowRight': !item.expanded, 'arrowDown': item.expanded}" ng-show="item.hasItems"></i>
-  <span class="name">{{item.key}}</span>
+  <span class="name" ng-if="item.key">{{item.key}}</span>
   <span class="value" ng-class="getValueStyleClass(item.type)">{{item.value}}</span>
   <div class="copyButton itemAddOn" ng-show="enableAddOn" ng-click="copyValue($event, item)" title="copy to clipboard"></div>
 </div>
 <ol ng-init="enableAddOn=false" ng-show="item.expanded">
-    <li ng-class="{parent: item.hasItems}"
+    <li class="treeNode"
+        ng-class="{parent: item.hasItems}"
         ng-repeat="item in item.items track by $id(item)"
         ng-include="'tree.html'"
         ng-click="toggleItem($event, item);">

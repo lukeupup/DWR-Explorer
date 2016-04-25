@@ -1,5 +1,6 @@
-<ol class="tree-outline">
-    <li ng-class="{parent: item.hasItems}"
+<ol class="treeOutline">
+    <li class="treeNode"
+        ng-class="{parent: item.hasItems}"
         ng-repeat="item in items"
         ng-include="'tree.html'"
         ng-click="toggleItem($event, item)"></li>

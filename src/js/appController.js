@@ -77,7 +77,6 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
 
   chrome.devtools.network.onNavigated.addListener(function () {
     $scope.$apply(function() {
-      // $scope.content = [];
       $scope.selectedDWR = null;
       $scope.dwrs = [];
     });
