@@ -1,16 +1,17 @@
 'use strict';
 
-app.controller('AppController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+app.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
   $scope.filterPattern = '';
-  $scope.showDetail = function (event, res) {
+  $rootScope.targetObjectName = 'response';
+  $scope.showDetail = function(event, res) {
     event.preventDefault();
-    $rootScope.content = res;
+    $rootScope.targetObject = res;
   };
-  $scope.clearItems = function () {
+  $scope.clearItems = function() {
     $rootScope.dwrs = [];
-    $rootScope.content = '';
+    $rootScope.targetObject = '';
   };
-  $scope.isVisible = function (dwr) {
+  $scope.isVisible = function(dwr) {
     var regExp;
     if ($scope.filterPattern === '') {
       regExp = new RegExp('.*');

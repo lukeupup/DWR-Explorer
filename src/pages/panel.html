@@ -7,6 +7,7 @@
     <script src="../lib/angular.js"></script>
     <script src="../lib/ngClipboard.js"></script>
     <script src="../lib/ngResizer.js"></script>
+    <script src="../lib/ngObject.js"></script>
 </head>
 <body>
 <main ng-controller="AppController">
@@ -27,13 +28,8 @@
          ng-resizer="vertical"
          ng-resizer-left=".side-panel" 
          ng-resizer-right=".detail-panel"></div>
-    <div class="J_DWRContent detail-panel" ng-controller="DetailController" ng-model="content">
-        <ol class="tree-outline" ng-model="tree.items">
-            <li ng-class="{parent: item.hasItems}"
-                ng-repeat="item in tree.items"
-                ng-include="templates.tree"
-                ng-click="toggleItem($event, item)"></li>
-        </ol>
+    <div class="J_DWRContent detail-panel">
+        <ng-object object="targetObject"></ng-object>
     </div>
 </main>
 <iframe id="sandbox" src="../sandbox.html" style="display: none;"></iframe>
