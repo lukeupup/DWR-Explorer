@@ -90,6 +90,8 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
       dwr.parsedResponse = message.data.parsedResponse;
       $scope.$apply(function () {
         $scope.dwrs.push(dwr);
+        $scope.currentTab = 'RESPONSE';
+        $scope.selectedDWR = $scope.dwrs[0];
       });
       delete dwrTempStorage[message.data.index];
     }

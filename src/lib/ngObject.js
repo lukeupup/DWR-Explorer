@@ -5,8 +5,9 @@ angular.module('ngObject', []).directive('ngObject', function() {
       object: '=',
       objectName: '='
     },
-    controller: ['$scope', 'ngClipboard', function($scope, ngClipboard) {
+    controller: ['$scope', '$document', 'ngClipboard', function($scope, $document, ngClipboard) {
       var STRING_MAX_LEN = 80;
+
       $scope.$watch('object', function(newVal) {
         $scope.data = {};
         $scope.data[$scope.objectName || ''] = newVal;
@@ -92,12 +93,22 @@ angular.module('ngObject', []).directive('ngObject', function() {
       };
 
       $scope.enableAddOn = false;
+
+      var dismissToast = function (toast) {
+        chrome.devtools.inspectedWindow.eval('console.log("' + toast + '");', function() {
+          console.log(arguments);
+        });
+      };
+
       $scope.copyValue = function(event, item) {
         var itemStr;
+        dismissToast('Copied to clipboard.');
         try {
           itemStr = JSON.stringify(item.ref);
         } catch (e) {
           itemStr = JSON.stringify(JSON.decycle(item.ref));
+          dismissToast('There exists circular references in the object!');
+          dismissToast('View http://goessner.net/articles/JsonPath/ for more information about the format of the copied object.');
         }
         ngClipboard.toClipboard(itemStr);
       };
