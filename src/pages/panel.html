@@ -39,10 +39,10 @@
                 ng-class="{selected: isCurrentTab('REQUEST')}" ng-click="switchTab('REQUEST')">Request</a>
         </div>
         <div class="detailPanelContainer" ng-if="selectedDWR">
-            <div ng-if="isCurrentTab('RESPONSE')">
+            <div ng-style="{display: isCurrentTab('RESPONSE') ? 'block': 'none'}">
                 <ng-object object="selectedDWR.parsedResponse" object-name="'Response'"></ng-object>
             </div>
-            <div ng-if="isCurrentTab('REQUEST')">
+            <div ng-style="{display: isCurrentTab('REQUEST') ? 'block': 'none'}">
                 <ng-object object="selectedDWR.parsedRequest" object-name="'Request'"></ng-object>
             </div>
         </div>
@@ -51,9 +51,7 @@
 <iframe id="sandbox" src="../sandbox.html" style="display: none;"></iframe>
 
 <script src="../js/dwr2script.js"></script>
-<script src="../js/dwrexplorer.js"></script>
 <script src="../js/appController.js"></script>
-<script src="../js/detailController.js"></script>
 
 </body>
 </html>
