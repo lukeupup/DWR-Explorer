@@ -11,6 +11,7 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
   var dwr2script = window.dwr2script;
 
   $scope.filterPattern = '';
+  $scope.dwrs = [];
 
   $scope.selectEntry = function (event, dwr) {
     event.preventDefault();
@@ -61,7 +62,7 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
     return url.substr(url.lastIndexOf('/') + 1);
   };
 
-  chrome.devtools.network.onRequestFinished.addListener(function (req) {
+  var onRequestFinished = function (req) {
     if (isDwrRequest(req)) {
       req.getContent(function (content) {
         var dwr = {
@@ -76,6 +77,16 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
         parseDWR(req.request.postData.text, content, dwrIndex);
       });
     }
+  };
+
+  chrome.devtools.network.getHAR(function (hars) {
+    hars.entries.forEach(function (req) {
+      onRequestFinished(req);
+    });
+  });
+
+  chrome.devtools.network.onRequestFinished.addListener(function (req) {
+    onRequestFinished(req);
   });
 
   chrome.devtools.network.onNavigated.addListener(function () {
