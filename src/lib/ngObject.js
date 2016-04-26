@@ -3,7 +3,7 @@ angular.module('ngObject', []).directive('ngObject', function() {
     restrict: 'E',
     scope: {
       object: '=',
-      objectName: '=',
+      objectName: '@',
       expandFirst: '='
     },
     controller: ['$scope', '$document', 'ngClipboard', function($scope, $document, ngClipboard) {
