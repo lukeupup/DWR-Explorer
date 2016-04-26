@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="dwrexplorer">
 <head>
-    <title>panel</title>
+    <title>DWR Explorer</title>
     <link rel="stylesheet" type="text/css" href="../css/dwrexplorer.css">
     <script src="../lib/cycle.js"></script>
     <script src="../lib/angular.js"></script>
@@ -20,8 +20,7 @@
             <ol class="dwrList">
                 <li ng-repeat="dwr in dwrs" class="dwrEntry" ng-class="{selected: dwr === selectedDWR}"
                     ng-show="isVisible(dwr);" ng-click="selectEntry($event, dwr);"
-                    title="{{dwr.har.request.url}}"
-                >
+                    title="{{dwr.har.request.url}}">
                     {{dwr.name}}
                 </li>
             </ol>
@@ -45,7 +44,14 @@
                 <ng-object object="selectedDWR.parsedResponse" ></ng-object>
             </div>
             <div ng-style="{display: isCurrentTab('REQUEST') ? 'block': 'none'}">
-                <ng-object object="selectedDWR.parsedRequest" ></ng-object>
+                <!-- TODO: no request/response hint -->
+                <section class="requestCallDetail" ng-repeat="call in selectedDWR.parsedRequest">
+                    <h1 class="callTitle" ng-if="selectedDWR.parsedRequest.length > 1">Call {{$index + 1}}</h1>
+                    <div ng-repeat="param in call track by $index">
+                        <h2 class="paramTitle" ng-if="call.length > 1">Param {{$index + 1}}</h2>
+                        <ng-object object="param" ></ng-object>
+                    </div>
+                </section>
             </div>
         </div>
     </div>

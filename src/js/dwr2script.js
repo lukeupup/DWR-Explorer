@@ -57,6 +57,24 @@
     }
     return scriptRightValue;
   };
+
+  var addToParams = function (callId, paramId, params) {
+    var callIndex = parseInt(callId.toString().replace(/[^\d]/g, ''), 10);
+    var paramIndex = parseInt(paramId.toString().replace(/[^\d]/g, ''), 10);
+    if (!params[callIndex]) {
+      params[callIndex] = [];
+    }
+    params[callIndex][paramIndex] = callId + '_' + paramId;
+  };
+
+  var concatenanteParams = function (params) {
+    return '[' + params.map(function (call) {
+      return '[' + call.map(function (param) {
+        return param;
+      }).join(',') + ']';
+    }).join(',') + ']';
+  };
+
   var makeScriptLine = function (line, params) {
     var codeRegEx = /^(c\d+)\-((e|param)\d+)=(.+)/;
     var match = line.match(codeRegEx);
@@ -65,7 +83,8 @@
       scriptLine = 'var ' + match[1] + '_' + match[2] + '=' +
         makeScriptRightValue(match[4]); 
       if (match[3] === 'param') {
-        params.push(match[1] + '_' + match[2]);
+        // params.push(match[1] + '_' + match[2]);
+        addToParams(match[1], match[2], params);
       }
     }
     return scriptLine;
@@ -80,7 +99,7 @@
     lines.forEach(function (line) {
       scriptLines.push(makeScriptLine(line, params));
     });
-    scriptLines.push('return [' + params.join(',') + '];');
+    scriptLines.push('return ' + concatenanteParams(params) + ';');
     var script = scriptLines.join(';');
     return makeSelfExecutingFunction(script);
   };
