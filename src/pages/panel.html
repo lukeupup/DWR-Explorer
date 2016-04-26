@@ -13,8 +13,8 @@
 <main ng-controller="AppController">
     <aside class="sidePanel">
         <div class="toolbarContainer">
-            <div class="clearItems" ng-click="clearItems();"></div>
-            <input class="filterItems" placeholder="Enter Regular Expression" ng-model="filterPattern"></input>
+            <a href="javascript:void(0);" class="toolbarButton clearItems" ng-click="clearItems();" title="Clear Entries"></a>
+            <input class="filterItems" placeholder="Filter Requests by RegEx" ng-model="filterPattern"></input>
         </div>
         <div class="entriesContainer">
             <ol class="dwrList">
@@ -41,15 +41,16 @@
         </div>
         <div class="detailPanelContainer" ng-if="selectedDWR">
             <div ng-style="{display: isCurrentTab('RESPONSE') ? 'block': 'none'}">
-                <ng-object object="selectedDWR.parsedResponse" ></ng-object>
+                <ng-object object="selectedDWR.parsedResponse" expand-first="true"></ng-object>
             </div>
             <div ng-style="{display: isCurrentTab('REQUEST') ? 'block': 'none'}">
                 <!-- TODO: no request/response hint -->
+                <div ng-if="selectedDWR.parsedRequest.length === 0" class="noDataHint">No request body</div>
                 <section class="requestCallDetail" ng-repeat="call in selectedDWR.parsedRequest">
                     <h1 class="callTitle" ng-if="selectedDWR.parsedRequest.length > 1">Call {{$index + 1}}</h1>
                     <div ng-repeat="param in call track by $index">
                         <h2 class="paramTitle" ng-if="call.length > 1">Param {{$index + 1}}</h2>
-                        <ng-object object="param" ></ng-object>
+                        <ng-object object="param" expand-first="true"></ng-object>
                     </div>
                 </section>
             </div>

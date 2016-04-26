@@ -3,5 +3,5 @@
         ng-class="{parent: item.hasItems}"
         ng-repeat="item in items"
         ng-include="'tree.html'"
-        ng-click="toggleItem($event, item)"></li>
+        ng-click="toggleItem(item, $event)"></li>
 </ol>

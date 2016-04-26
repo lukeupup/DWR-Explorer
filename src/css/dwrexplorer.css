@@ -149,12 +149,6 @@ main {
   -webkit-user-select: none;
 }
 
-.toolbarContainer>div {
-  flex: none;
-  height: 24px;
-  width: 24px;
-}
-
 .toolbarContainer a.toolbarTabButton {
   float: left;
   border: 1px solid transparent;
@@ -196,12 +190,23 @@ main {
 .filterItems {
   width: 100%;
   margin-right: 2px;
+  outline: none;
 }
-
+.noDataHint {
+  color: rgb(128, 128, 128);
+}
+.toolbarButton {
+  display: block;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+.toolbarButton:hover {
+  background-color: #e5e5e5;
+}
 .clearItems {
   background-image: url(../assets/icons.png);
-  background-position: -67px 0;
-  cursor: pointer;
+  background-position: -69px 0;
 }
 
 .copyButton {

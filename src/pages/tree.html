@@ -9,6 +9,6 @@
         ng-class="{parent: item.hasItems}"
         ng-repeat="item in item.items track by $id(item)"
         ng-include="'tree.html'"
-        ng-click="toggleItem($event, item);">
+        ng-click="toggleItem(item, $event);">
     </li>
 </ol>

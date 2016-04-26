@@ -3,7 +3,8 @@ angular.module('ngObject', []).directive('ngObject', function() {
     restrict: 'E',
     scope: {
       object: '=',
-      objectName: '='
+      objectName: '=',
+      expandFirst: '='
     },
     controller: ['$scope', '$document', 'ngClipboard', function($scope, $document, ngClipboard) {
       var STRING_MAX_LEN = 80;
@@ -32,6 +33,9 @@ angular.module('ngObject', []).directive('ngObject', function() {
             hasItems: false,
             type: ''
           });
+        }
+        if ($scope.expandFirst) {
+          $scope.toggleItem($scope.items[0]);
         }
       });
 
@@ -77,7 +81,7 @@ angular.module('ngObject', []).directive('ngObject', function() {
 
           case 'string':
             if (value.length > STRING_MAX_LEN) {
-              property.text = '"' + value.substring(0, STRING_MAX_LEN) + '"...';
+              property.text = '"' + value.substring(0, STRING_MAX_LEN) + '...';
               property.originalText = '"' + value + '"';
             } else {
               property.text = '"' + value + '"';
@@ -129,11 +133,13 @@ angular.module('ngObject', []).directive('ngObject', function() {
         });
       };
 
-      $scope.toggleItem = function(event, item) {
-        if (event.target.classList.contains('itemAddOn')) {
-          return;
+      $scope.toggleItem = function(item, event) {
+        if (event) {
+          if (event.target.classList.contains('itemAddOn')) {
+            return;
+          }
+          event.stopPropagation();
         }
-        event.stopPropagation();
 
         if (!item.hasItems) {
           return false;
