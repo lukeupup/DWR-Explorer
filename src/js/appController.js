@@ -2,7 +2,7 @@
 
 var app = angular.module('dwrexplorer', ['ngClipboard', 'ngResizer', 'ngObject']);
 
-app.controller('AppController', ['$scope', '$document', function($scope, $document) {
+app.controller('AppController', ['$scope', '$document', '$timeout', function($scope, $document, $timeout) {
 
   var sandbox = $document[0].querySelector('#sandbox');
   var dwrTempStorage = {};
@@ -105,10 +105,14 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
       dwr.parsedResponse = message.data.parsedResponse;
       $scope.$apply(function () {
         $scope.dwrs.push(dwr);
-        $scope.currentTab = 'RESPONSE';
+        $scope.switchTab('RESPONSE');
         if (!$scope.selectedDWR) {
           $scope.selectEntry($scope.dwrs[0]);
         }
+        $timeout(function () {
+          var container = document.querySelector('.J_EntriesContainer');
+          container.scrollTop = container.scrollHeight;
+        }, 0, false);
       });
       delete dwrTempStorage[message.data.index];
     }

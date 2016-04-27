@@ -16,7 +16,7 @@
             <a href="javascript:void(0);" class="toolbarButton clearItems" ng-click="clearItems();" title="Clear Entries"></a>
             <input class="filterItems" placeholder="Filter Requests by RegEx" ng-model="filterPattern"></input>
         </div>
-        <div class="flexViewBody entriesContainer">
+        <div class="flexViewBody entriesContainer J_EntriesContainer">
             <ol class="dwrList">
                 <li ng-repeat="dwr in dwrs" class="dwrEntry" ng-class="{selected: dwr === selectedDWR}"
                     ng-show="isVisible(dwr);" ng-click="selectEntry(dwr, $event);"
