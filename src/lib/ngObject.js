@@ -99,21 +99,19 @@ angular.module('ngObject', []).directive('ngObject', function() {
       $scope.enableAddOn = false;
 
       var dismissToast = function (toast) {
-        chrome.devtools.inspectedWindow.eval('console.log("' + toast + '");', function() {
-          console.log(arguments);
-        });
+        chrome.devtools.inspectedWindow.eval('console.log("' + toast + '");');
       };
 
       $scope.copyValue = function(event, item) {
         var itemStr;
-        dismissToast('Copied to clipboard.');
         try {
-          itemStr = JSON.stringify(item.ref);
+          itemStr = JSON.stringify(item.ref, null, 2);
         } catch (e) {
-          itemStr = JSON.stringify(JSON.decycle(item.ref));
+          itemStr = JSON.stringify(JSON.decycle(item.ref), null, 2);
           dismissToast('There exists circular references in the object!');
           dismissToast('View http://goessner.net/articles/JsonPath/ for more information about the format of the copied object.');
         }
+        dismissToast('Copied to clipboard.');
         ngClipboard.toClipboard(itemStr);
       };
 

@@ -1,9 +1,22 @@
 angular.module('ngClipboard', [])
 
     .factory('ngClipboard', function($compile,$rootScope,$document) {
+        var entityMap = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': '&quot;',
+            "'": '&#39;',
+            "/": '&#x2F;'
+        };
+        function escapeHtml(string) {
+            return String(string).replace(/[&<>"'\/]/g, function (s) {
+                return entityMap[s];
+            });
+        }
         return {
             toClipboard: function(element){
-
+            element = escapeHtml(element).replace(/\n\r?/g, '<br>').replace(/ /g, '&nbsp;');
             var copyElement = angular.element('<span id="ngClipboardCopyId">'+element+'</span>');
             var body = $document.find('body').eq(0);
             body.append($compile(copyElement)($rootScope));
