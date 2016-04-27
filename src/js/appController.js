@@ -13,9 +13,10 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
   $scope.filterPattern = '';
   $scope.dwrs = [];
 
-  $scope.selectEntry = function (event, dwr) {
-    event.preventDefault();
-    $scope.switchTab('RESPONSE');
+  $scope.selectEntry = function (dwr, event) {
+    if (event) {
+      event.preventDefault();
+    }
     $scope.selectedDWR = dwr;
   };
   $scope.clearItems = function() {
@@ -105,7 +106,9 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
       $scope.$apply(function () {
         $scope.dwrs.push(dwr);
         $scope.currentTab = 'RESPONSE';
-        $scope.selectedDWR = $scope.dwrs[0];
+        if (!$scope.selectedDWR) {
+          $scope.selectEntry($scope.dwrs[0]);
+        }
       });
       delete dwrTempStorage[message.data.index];
     }
