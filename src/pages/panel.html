@@ -11,15 +11,15 @@
 </head>
 <body>
 <main ng-controller="AppController">
-    <aside class="sidePanel">
-        <div class="toolbarContainer">
+    <aside class="sidePanel flexView">
+        <div class="flexToolbar sidePanelToolbar">
             <a href="javascript:void(0);" class="toolbarButton clearItems" ng-click="clearItems();" title="Clear Entries"></a>
             <input class="filterItems" placeholder="Filter Requests by RegEx" ng-model="filterPattern"></input>
         </div>
-        <div class="entriesContainer">
+        <div class="flexViewBody entriesContainer">
             <ol class="dwrList">
                 <li ng-repeat="dwr in dwrs" class="dwrEntry" ng-class="{selected: dwr === selectedDWR}"
-                    ng-show="isVisible(dwr);" ng-click="selectEntry($event, dwr);"
+                    ng-show="isVisible(dwr);" ng-click="selectEntry(dwr, $event);"
                     title="{{dwr.har.request.url}}">
                     {{dwr.name}}
                 </li>
@@ -32,14 +32,14 @@
          ng-resizer-right=".detailPanel"
          ng-resizer-left-min="150"
          ng-resizer-width="6"></div>
-    <div class="detailPanel">
-        <div class="toolbarContainer">
+    <div class="detailPanel flexView">
+        <div class="flexToolbar">
             <a href="javascript:void(0);" class="toolbarTabButton"
                 ng-class="{selected: isCurrentTab('RESPONSE')}" ng-click="switchTab('RESPONSE')">Response</a>
             <a href="javascript:void(0);" class="toolbarTabButton"
                 ng-class="{selected: isCurrentTab('REQUEST')}" ng-click="switchTab('REQUEST')">Request</a>
         </div>
-        <div class="detailPanelContainer" ng-if="selectedDWR">
+        <div class="detailPanelContainer flexViewBody" ng-if="selectedDWR">
             <div ng-style="{display: isCurrentTab('RESPONSE') ? 'block': 'none'}">
                 <ng-object object="selectedDWR.parsedResponse" expand-first="true"></ng-object>
             </div>
