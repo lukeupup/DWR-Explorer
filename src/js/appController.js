@@ -26,11 +26,11 @@ app.controller('AppController', ['$scope', '$document', function($scope, $docume
   $scope.isVisible = function(dwr) {
     var regExp;
     if ($scope.filterPattern === '') {
-      regExp = new RegExp('.*');
+      regExp = new RegExp('.*', 'i');
     } else {
-      regExp = new RegExp($scope.filterPattern);
+      regExp = new RegExp($scope.filterPattern, 'i');
     }
-    return dwr.name.search(regExp) >= 0;
+    return dwr.har.request.url.search(regExp) >= 0;
   };
   $scope.switchTab  = function (tab) {
     $scope.currentTab = tab;
