@@ -81,7 +81,7 @@ app.controller('AppController', ['$scope', '$document', '$timeout', function($sc
         dwrTempStorage[++dwrIndex] = dwr;
         // todo: it's better to implement using promise.
         // like: parseDWR(dwr).done(function(){...});
-        parseDWR(req.request.postData.text, content, dwrIndex);
+        parseDWR(req.request.postData.text || '', content || '', dwrIndex);
       });
     }
   };

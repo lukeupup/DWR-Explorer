@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "DWR Explorer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devtools_page": "devtools.html",
   "permissions": [
     "http://*/*",
