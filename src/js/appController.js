@@ -38,6 +38,12 @@ app.controller('AppController', ['$scope', '$document', '$timeout', function($sc
   $scope.isCurrentTab = function (tab) {
     return $scope.currentTab === tab;
   };
+  $scope.toggleRequestHintDetail = function () {
+    $scope.showRequestHintDetail = !$scope.showRequestHintDetail;
+  };
+  $scope.getShowRequestHintDetail = function () {
+    return !!$scope.showRequestHintDetail;
+  };
 
   $scope.switchTab('RESPONSE');
 

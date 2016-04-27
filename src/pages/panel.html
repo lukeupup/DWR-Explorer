@@ -53,6 +53,16 @@
                         <ng-object object="param" expand-first="true"></ng-object>
                     </div>
                 </section>
+                <div class="requestHint" ng-if="selectedDWR.parsedRequest.length !== 0">
+                    Please note that the parsed request may slightly differ from your original data.
+                    <a href="javascript:void(0);" ng-click="toggleRequestHintDetail()">{{getShowRequestHintDetail() ? 'Hide Details' : 'Show Details'}}</a>
+                    <ul ng-if="getShowRequestHintDetail()">
+                        <li>"undefined" in the original data will be shown as "null".</li>
+                        <li>All functions will be removed from objects.</li>
+                        <li>String objects which is created by "new" operator (e.g. new String('some text')) will be shown as corresponding literal string. (The same to Number and Boolean.)</li>
+                        <li>Special types such as Regular Expression, Date, XML, NaN, etc. are not supported and may cause unexpected behavior.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

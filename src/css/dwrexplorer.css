@@ -185,6 +185,17 @@ a.toolbarTabButton.selected {
   margin: 3px 0;
   font-size: 12px;
 }
+.requestHint {
+  color: rgb(128, 128, 128);
+  margin: 1em;
+  font-style: italic;
+}
+.requestHint ul {
+  margin: .5em;
+}
+.requestHint li::before {
+  content: "- ";
+}
 .filterItems {
   flex: 1;
   outline: none;
