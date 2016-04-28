@@ -76,7 +76,7 @@ main {
 }
 
 .dwrList .dwrEntry.selected {
-    background: #69b;
+    background: rgb(56, 121, 217);
     color: #fff;
 }
 
