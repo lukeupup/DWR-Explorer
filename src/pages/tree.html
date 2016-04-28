@@ -2,7 +2,7 @@
   <i class="arrow" ng-class="{'arrowRight': !item.expanded, 'arrowDown': item.expanded}" ng-show="item.hasItems"></i>
   <span class="name" ng-if="item.key">{{item.key}}</span>
   <span class="value" ng-class="getValueStyleClass(item.type)">{{item.value}}</span>
-  <a href="javascript:void(0);" class="copyButton itemAddOn" ng-show="enableAddOn" ng-click="copyValue($event, item)" title="copy to clipboard"></a>
+  <span class="copyButton itemAddOn" ng-show="enableAddOn" ng-click="copyValue($event, item)" title="copy to clipboard"></span>
 </div>
 <ol ng-init="enableAddOn=false" ng-show="item.expanded">
     <li class="treeNode"

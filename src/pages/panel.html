@@ -13,7 +13,7 @@
 <main ng-controller="AppController">
     <aside class="sidePanel flexView">
         <div class="flexToolbar sidePanelToolbar">
-            <a href="javascript:void(0);" class="toolbarButton clearItems" ng-click="clearItems();" title="Clear Entries"></a>
+            <span class="toolbarButton clearItems" ng-click="clearItems();" title="Clear Entries"></span>
             <input class="filterItems" placeholder="Filter Requests by RegEx" ng-model="filterPattern"></input>
         </div>
         <div class="flexViewBody entriesContainer J_EntriesContainer">
@@ -34,10 +34,10 @@
          ng-resizer-width="6"></div>
     <div class="detailPanel flexView">
         <div class="flexToolbar">
-            <a href="javascript:void(0);" class="toolbarTabButton"
-                ng-class="{selected: isCurrentTab('RESPONSE')}" ng-click="switchTab('RESPONSE')">Response</a>
-            <a href="javascript:void(0);" class="toolbarTabButton"
-                ng-class="{selected: isCurrentTab('REQUEST')}" ng-click="switchTab('REQUEST')">Request</a>
+            <span class="toolbarTabButton"
+                ng-class="{selected: isCurrentTab('RESPONSE')}" ng-click="switchTab('RESPONSE')">Response</span>
+            <span class="toolbarTabButton"
+                ng-class="{selected: isCurrentTab('REQUEST')}" ng-click="switchTab('REQUEST')">Request</span>
         </div>
         <div class="detailPanelContainer flexViewBody" ng-if="selectedDWR">
             <div ng-style="{display: isCurrentTab('RESPONSE') ? 'block': 'none'}">
@@ -55,7 +55,7 @@
                 </section>
                 <div class="requestHint" ng-if="selectedDWR.parsedRequest.length !== 0">
                     Please note that the parsed request may slightly differ from your original data.
-                    <a href="javascript:void(0);" ng-click="toggleRequestHintDetail()">{{getShowRequestHintDetail() ? 'Hide Details' : 'Show Details'}}</a>
+                    <span class="requestHintShowDetailButton" ng-click="toggleRequestHintDetail()">{{getShowRequestHintDetail() ? 'Hide Details' : 'Show Details'}}</span>
                     <ul ng-if="getShowRequestHintDetail()">
                         <li>"undefined" in the original data will be shown as "null".</li>
                         <li>All functions will be removed from objects.</li>
