@@ -83,7 +83,6 @@
       scriptLine = 'var ' + match[1] + '_' + match[2] + '=' +
         makeScriptRightValue(match[4]); 
       if (match[3] === 'param') {
-        // params.push(match[1] + '_' + match[2]);
         addToParams(match[1], match[2], params);
       }
     }
@@ -94,7 +93,6 @@
     var lines = requestBody.split('\n');
     var scriptLines = [];
     var returnParams = [];
-    // TODO: considering there could be multiple calls, it's better to have a map here.
     var params = [];
     lines.forEach(function (line) {
       scriptLines.push(makeScriptLine(line, params));

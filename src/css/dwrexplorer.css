@@ -132,7 +132,7 @@ main {
 
 .treeOutline .arrow {
   position: absolute;
-  top: .3125rem;
+  top: .375rem;
   left: 0;
   transition: transform 0.2s;
   width: 0;
