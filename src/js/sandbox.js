@@ -1,23 +1,18 @@
 window.addEventListener('message', function(event) {
   var message = event.data;
-  if (message.type === 'parseDWR') {
-    var request, response;
+  if (message.type === 'evalScript') {
+    var result, error;
     try {
-      request = eval(message.data.requestScript);
+      result = eval(message.data.script);
     } catch (e) {
-      console.log(e);
-    }
-    try {
-      response = eval(message.data.responseScript);
-    } catch (e) {
-      console.log(e);
+      error = e.toString();
     }
     window.parent.postMessage({
-      type: 'parseDWRResult',
+      type: 'evalScriptResult',
       data: {
         index: message.data.index,
-        parsedRequest: request,
-        parsedResponse: response
+        result: result,
+        error: error
       }
     }, '*');
   }

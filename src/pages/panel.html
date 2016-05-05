@@ -44,12 +44,15 @@
                 <ng-object object="selectedDWR.parsedResponse" expand-first="true"></ng-object>
             </div>
             <div ng-style="{display: isCurrentTab('REQUEST') ? 'block': 'none'}">
-                <!-- TODO: no request/response hint -->
                 <div ng-if="selectedDWR.parsedRequest.length === 0" class="noDataHint">No request body</div>
                 <section class="requestCallDetail" ng-repeat="call in selectedDWR.parsedRequest">
                     <h1 class="callTitle" ng-if="selectedDWR.parsedRequest.length > 1">Call {{$index + 1}}</h1>
                     <div ng-repeat="param in call track by $index">
-                        <h2 class="paramTitle" ng-if="call.length > 1">Param {{$index + 1}}</h2>
+                        <!-- Angular will handle the situation that selectedDWR.requestParameters is empty. -->
+                        <h2 class="paramTitle"
+                            title="{{ selectedDWR.requestParameters[$index] ? '' : 'Cannot retrieve parameter name due to technical limitation.' }}">
+                            {{ selectedDWR.requestParameters[$index] || 'Param ' + ($index + 1) }}
+                        </h2>
                         <ng-object object="param" expand-first="true"></ng-object>
                     </div>
                 </section>
