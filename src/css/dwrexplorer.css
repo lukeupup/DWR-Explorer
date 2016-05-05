@@ -66,6 +66,9 @@ main {
   font-size: 120%;
   cursor: pointer;
 }
+.dwrList .dwrEntry.error {
+  color: red;
+}
 
 .dwrList .dwrEntry:nth-child(2n) {
   background: #f1f1f1;
@@ -76,8 +79,11 @@ main {
 }
 
 .dwrList .dwrEntry.selected {
-    background: rgb(56, 121, 217);
-    color: #fff;
+  background: rgb(56, 121, 217);
+  color: #fff;
+}
+.dwrList .dwrEntry.selected.error {
+  color: #b00;
 }
 
 .separator {

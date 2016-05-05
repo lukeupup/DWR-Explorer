@@ -155,6 +155,9 @@ app.controller('AppController', ['$scope', '$document', '$timeout', function($sc
     getResponse(req).then(function (response) {
       $scope.$apply(function () {
         dwr.response = response;
+        if (/^dwr\.engine\._remoteHandleException/m.test(response)) {
+          dwr.serverException = true;
+        }
       });
       return parseDWR('response', response);
     }).then(function (result) {

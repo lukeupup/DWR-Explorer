@@ -1,5 +1,9 @@
 (function () {
   // TODO: exception handling
+
+  // TODO: try executing:
+  // dwr.engine._execute('/xi/ajax/remoting', 'actionSearchControllerProxyasd', 'asdfasdf', null, {success:function(){}});
+  // the response contains if-else statement which we can't parse right now.
   'use strict';
   window.dwr2script = {};
 

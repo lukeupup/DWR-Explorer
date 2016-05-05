@@ -18,7 +18,7 @@
         </div>
         <div class="flexViewBody entriesContainer J_EntriesContainer">
             <ol class="dwrList">
-                <li ng-repeat="dwr in dwrs" class="dwrEntry" ng-class="{selected: dwr === selectedDWR}"
+                <li ng-repeat="dwr in dwrs" class="dwrEntry" ng-class="{ selected: dwr === selectedDWR, error: dwr.har.response.status >= 400 || dwr.serverException }"
                     ng-show="isVisible(dwr);" ng-click="selectEntry(dwr, $event);"
                     title="{{dwr.har.request.url}}">
                     {{dwr.name}}
