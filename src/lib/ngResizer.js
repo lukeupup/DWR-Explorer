@@ -5,10 +5,24 @@ angular.module('ngResizer', []).directive('ngResizer', function($document) {
   };
 
   return function($scope, $element, $attrs) {
+    var initStyle;
+    if ($attrs.ngResizer === 'vertical') {
+      initStyle = {
+        width: $attrs.ngResizerWidth + 'px',
+        top: '0',
+        bottom: '0',
+        left: $($attrs.ngResizerLeft)[0].clientWidth + 'px'
+      };
+    } else {
+      initStyle = {
+        height: $attrs.ngResizerWidth + 'px',
+        left: '0',
+        right: '0',
+        top: $($attrs.ngResizerTop)[0].clientHeight + 'px'
+      }
+    }
 
-    $element.css({
-      width: $attrs.ngResizerWidth + 'px'
-    });
+    $element.css(initStyle);
 
     $element.on('mousedown', function(event) {
       event.preventDefault();
