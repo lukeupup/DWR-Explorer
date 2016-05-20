@@ -51,6 +51,7 @@ main {
 
 .sidePanelToolbar {
   display: flex;
+  position: relative;
 }
 
 .sidePanel .dwrList {
@@ -215,6 +216,20 @@ main {
   flex: 1;
   outline: none;
   margin-left: 2px;
+  padding-right: 16px;
+}
+.clearFilterBtn {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background: url('../assets/icons.png') -176px -97px;
+  top: 9px;
+  right: 7px;
+  opacity: 0.9;
+  cursor: pointer;
+}
+.clearFilterBtn:hover {
+  opacity: 1;
 }
 .noDataHint {
   color: rgb(128, 128, 128);

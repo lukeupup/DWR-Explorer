@@ -15,6 +15,7 @@
         <div class="flexToolbar sidePanelToolbar">
             <span class="toolbarButton clearItems" ng-click="clearItems();" title="Clear Entries"></span>
             <input class="filterItems" placeholder="Filter Requests by RegEx" ng-model="filterPattern"></input>
+            <span class="clearFilterBtn" ng-click="filterPattern = ''" ng-show="filterPattern"></span>
         </div>
         <div class="flexViewBody entriesContainer J_EntriesContainer">
             <ol class="dwrList">
@@ -40,10 +41,10 @@
                 ng-class="{selected: isCurrentTab('REQUEST')}" ng-click="switchTab('REQUEST')">Request</span>
         </div>
         <div class="detailPanelContainer flexViewBody" ng-if="selectedDWR">
-            <div ng-style="{display: isCurrentTab('RESPONSE') ? 'block': 'none'}">
+            <div ng-show="isCurrentTab('RESPONSE')">
                 <ng-object object="selectedDWR.parsedResponse" expand-first="true"></ng-object>
             </div>
-            <div ng-style="{display: isCurrentTab('REQUEST') ? 'block': 'none'}">
+            <div ng-show="isCurrentTab('REQUEST')">
                 <div ng-if="selectedDWR.parsedRequest.length === 0" class="noDataHint">No request body</div>
                 <section class="requestCallDetail" ng-repeat="call in selectedDWR.parsedRequest">
                     <h1 class="callTitle" ng-if="selectedDWR.parsedRequest.length > 1">Call {{$index + 1}}</h1>
