@@ -110,7 +110,7 @@
 
   var transformResponse = function (responseBody) {
     var script = responseBody
-      .replace(/throw.*\r/, '')
+      .replace(/throw.*;/, '')
       .replace(/dwr\.engine\.(_remoteHandleCallback|_remoteHandleException)\(('\d+'),('\d+'),(.*)\)/, 'return $4');
     return makeSelfExecutingFunction(script);
   };
