@@ -53,7 +53,7 @@
         break;
       default:
         if (/^Object_/.test(type)) {
-          scriptRightValue = decodeURIComponent(expression).replace(/reference:(\w+)\-(\w+)/g, '$1_$2');
+          scriptRightValue = decodeURIComponent(expression).replace(/([^:,\s\{\}]+):reference:(\w+)\-(\w+)/g, '"$1":$2_$3');
         } else {
           scriptRightValue = 'null';
           throw 'Unexpected DWR request body format: unexpected type: ' + type;
