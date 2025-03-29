@@ -1,12 +1,12 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "DWR Explorer",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "icons": {
     "200": "assets/dwr-logo.png"
   },
   "devtools_page": "devtools.html",
-  "permissions": [
+  "host_permissions": [
     "http://*/*",
     "https://*/*"
   ],
@@ -14,6 +14,14 @@
      "pages": ["sandbox.html"]
   },
   "web_accessible_resources": [
-    "assets/*"
+    {
+      "resources": [
+         "assets/*"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+   
   ]
 }
